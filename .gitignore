@@ -1,11 +1,11 @@
 # ignore CMake Build directory
-\builds
-\install
-\out
-\bin
+/builds
+/install
+/out
+/bin
 
 # ignore vcpkg folder
-\vcpkg
+/vcpkg
 
 # ignore vscode specific directory
 .vscode/*
