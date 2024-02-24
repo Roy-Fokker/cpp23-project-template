@@ -5,9 +5,12 @@ module;
 
 export module example;
 
-export void print_test()
+export namespace example
 {
-	std::println("Example Module: Hello World! -std");
+	void print_test()
+	{
+		std::println("Example Module: Hello World! -std");
 
-	fmt::println("Example Module: Hello World! -fmt");
+		fmt::println("Example Module: Hello World! -fmt");
+	}
 }

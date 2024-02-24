@@ -9,5 +9,5 @@ auto main() -> int
 
 	fmt::println("Hello World! -fmt");
 
-	print_test();
+	example::print_test();
 }
