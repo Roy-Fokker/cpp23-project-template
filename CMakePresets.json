@@ -2,7 +2,7 @@
 	"version": 5,
 	"cmakeMinimumRequired": {
 		"major": 3,
-		"minor": 24,
+		"minor": 28,
 		"patch": 0
 	},
 	"configurePresets": [
@@ -17,7 +17,8 @@
 			"generator": "Ninja Multi-Config",
 			"cacheVariables": {
 				"CMAKE_EXPORT_COMPILE_COMMANDS": true,
-				"CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin"
+				"CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin",
+				"CMAKE_MODULE_PATH": "${sourceDir}/cmake"
 			}
 		},
 		{
