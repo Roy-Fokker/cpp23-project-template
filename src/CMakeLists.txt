@@ -21,8 +21,14 @@ target_compile_definitions(${PRJ_APP_NAME}
 
 # source files for this application
 target_sources(${PRJ_APP_NAME}
+	# Non C++ module source files
 	PRIVATE
-		main.cpp)
+		main.cpp
+
+	# magic encantations for C++ Modules Support in CMake
+	PRIVATE FILE_SET app_modules TYPE CXX_MODULES FILES
+		example.ixx
+)
 
 # libraries used by this application
 target_link_libraries(${PRJ_APP_NAME}
