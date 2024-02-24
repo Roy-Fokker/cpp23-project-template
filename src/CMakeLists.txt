@@ -7,7 +7,7 @@ set(PRJ_APP_NAME "cpp23-application")
 # create executable for initial setup
 add_executable(${PRJ_APP_NAME})
 
-# ensure it's Standard C++ 20
+# ensure it's Standard C++ 23
 target_compile_features(${PRJ_APP_NAME} PRIVATE cxx_std_23)
 
 # set preprocessor defines

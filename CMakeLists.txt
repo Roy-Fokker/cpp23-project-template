@@ -15,8 +15,8 @@ set(CXX_SCAN_FOR_MODULES ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 # force C++ version to 23
 set(CMAKE_CXX_STANDARD 23)
+# standard is required
 set(CXX_STANDARD_REQUIRED ON)
-
 
 # executable source folder
 add_subdirectory(src)
