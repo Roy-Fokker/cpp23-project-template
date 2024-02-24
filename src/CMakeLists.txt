@@ -13,10 +13,10 @@ target_compile_features(${PRJ_APP_NAME} PRIVATE cxx_std_23)
 # set preprocessor defines
 target_compile_definitions(${PRJ_APP_NAME}
 	PRIVATE 
-		UNICODE _UNICODE
-		_CRT_SECURE_NO_WARNINGS
-		NOMINMAX 
-		WIN32_LEAN_AND_MEAN
+		UNICODE _UNICODE            # Tell compiler we are using UNICODE
+		_CRT_SECURE_NO_WARNINGS     # Don't want MSVC's CRT warnings
+		NOMINMAX                    # Don't want Window.h to define min and max macros
+		WIN32_LEAN_AND_MEAN         # Windows.h should only include the basics
 )
 
 # source files for this application
