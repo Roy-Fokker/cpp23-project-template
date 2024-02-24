@@ -1,9 +1,6 @@
-cmake_minimum_required(VERSION 3.27)
+cmake_minimum_required(VERSION 3.28)
 
-# Enable policy to make vcpkg copy dll/so to build directory
-cmake_policy(SET CMP0087 NEW)
-
-# include logic to build glsl files
+# include logic to cmake non-module files
 # include(cmake/glsl_compiler.cmake)
 
 # project and language to be used
