@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
 
-# include logic to cmake non-module files
-# include(cmake/glsl_compiler.cmake)
-
 # project and language to be used
 project(cpp23-project-template
 	LANGUAGES CXX
@@ -16,7 +13,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # force C++ version to 23
 set(CMAKE_CXX_STANDARD 23)
 # standard is required
-set(CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # executable source folder
 add_subdirectory(src)
