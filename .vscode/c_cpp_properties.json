@@ -1,12 +1,10 @@
 {
     "configurations": [
         {
-            "name": "msvc config",
+            "name": "Win32",
             "configurationProvider": "ms-vscode.cmake-tools",
-            "cStandard": "c23",
-            "cppStandard": "c++23",
             "intelliSenseMode": "windows-msvc-x64",
-            "compileCommands": "${workspaceFolder}/builds/Windows-Default/compile_commands.json"
+            "compileCommands": "${workspaceFolder}/out/build/Windows-Default/compile_commands.json"
         }
     ],
     "version": 4
