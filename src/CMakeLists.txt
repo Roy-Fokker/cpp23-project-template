@@ -1,6 +1,9 @@
 # find vcpkg installed library
 find_package(fmt CONFIG REQUIRED)
 
+# find std modules
+find_package(stdmodules REQUIRED)
+
 # name of this application/library
 set(PRJ_APP_NAME "cpp23-application")
 
@@ -19,6 +22,12 @@ target_compile_definitions(${PRJ_APP_NAME}
 		WIN32_LEAN_AND_MEAN         # Windows.h should only include the basics
 )
 
+# precompile headers for this library
+# target_precompile_headers(${PRJ_APP_NAME} 
+# 	PUBLIC
+# 		pch.hpp
+# )
+
 # source files for this application
 target_sources(${PRJ_APP_NAME}
 	# Non C++ module source files
@@ -33,5 +42,6 @@ target_sources(${PRJ_APP_NAME}
 # libraries used by this application
 target_link_libraries(${PRJ_APP_NAME}
 	PRIVATE
+		stdmodules
 		fmt::fmt
 )
