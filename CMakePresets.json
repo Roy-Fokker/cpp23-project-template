@@ -1,5 +1,5 @@
 {
-	"version": 5,
+	"version": 7,
 	"cmakeMinimumRequired": {
 		"major": 3,
 		"minor": 28,
@@ -7,19 +7,36 @@
 	},
 	"configurePresets": [
 		{
-			"name": "ninja-multi-vcpkg",
-			"displayName": "Ninja Multi-Config",
-			"description": "Configure with vcpkg toolchain and generate Ninja project files for all configurations",
+			"name": "base",
+			"description": "Configure with vcpkg toolchain and set some basic directories",
 			"hidden": true,
-			"binaryDir": "${sourceDir}/builds/${presetName}",
-			"installDir": "${sourceDir}/install/${presetName}",
+			"binaryDir": "${sourceDir}/out/build/${presetName}",
+			"installDir": "${sourceDir}/out/install/${presetName}",
 			"toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-			"generator": "Ninja Multi-Config",
+			"environment": {
+				"VCPKG_FEATURE_FLAGS": "manifests,versions,binarycaching,registries"
+			},
 			"cacheVariables": {
 				"CMAKE_EXPORT_COMPILE_COMMANDS": true,
 				"CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin",
 				"CMAKE_MODULE_PATH": "${sourceDir}/cmake"
 			}
+		},
+		{
+			"name": "ninja",
+			"displayName": "Ninja build",
+			"description": "Generate Ninja project files for current configuration",
+			"inherits": "base",
+			"hidden": true,
+			"generator": "Ninja"
+		},
+		{
+			"name": "ninja-multi-config",
+			"displayName": "Ninja Build Multi-Config",
+			"description": "Generate Ninja project files for all configurations",
+			"inherits": "base",
+			"hidden": true,
+			"generator": "Ninja Multi-Config"
 		},
 		{
 			"name": "msvc-x64",
@@ -34,18 +51,23 @@
 				"strategy": "external"
 			},
 			"cacheVariables": {
+				"MSVC_TOOLS_VERSION": "14.39.33519",
 				"CMAKE_CXX_COMPILER": "cl.exe",
-				"CMAKE_CXX_FLAGS": "/utf-8 /EHsc /W4 /permissive- /Zc:__cplusplus /Zc:preprocessor /Zc:throwingNew /Zc:inline /Zc:externConstexpr /Zc:templateScope /Zc:checkGwOdr /Zc:enumTypes",
-				"COMPILE_DEFINITIONS": "UNICODE;_UNICODE;_CRT_SECURE_NO_WARNINGS;NOMINMAX;WIN32_LEAN_AND_MEAN;"
+				"CMAKE_CXX_FLAGS": "/utf-8 /EHsc /W4 /permissive- /Zc:__cplusplus /Zc:preprocessor /Zc:throwingNew /Zc:inline /Zc:externConstexpr /Zc:templateScope /Zc:checkGwOdr /Zc:enumTypes"
 			}
 		},
 		{
 			"name": "Windows-Default",
 			"displayName": "Windows x64 Build",
 			"inherits": [
-				"ninja-multi-vcpkg",
+				"ninja",
 				"msvc-x64"
-			]
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Windows"
+			}
 		}
 	],
 	"buildPresets": [
@@ -61,7 +83,8 @@
 			"configurePreset": "Windows-Default",
 			"displayName": "Windows Release",
 			"description": "Build using ninja multi vcpkg release configuration for windows",
-			"configuration": "Release"
+			"configuration": "Release",
+			"cleanFirst": true
 		},
 		{
 			"name": "windows-relwithdebinfo",
