@@ -67,7 +67,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(stdmodules)
 
-# # create stdmodules library for consumption 
+# create stdmodules library for consumption 
 add_library(stdmodules STATIC)
 target_sources(stdmodules
 	PUBLIC 
@@ -76,6 +76,13 @@ target_sources(stdmodules
 	FILES
 		${stdmodules_SOURCE_DIR}/std.${STD_MODULE_FILE_EXT}
 		${stdmodules_SOURCE_DIR}/std.compat.${STD_MODULE_FILE_EXT}
+)
+
+# Copy ifc files for IntelliSense
+install(
+	DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/stdmodules.dir/
+	DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/ifc
+	FILES_MATCHING PATTERN "*.ifc"
 )
 
 # message("\n"

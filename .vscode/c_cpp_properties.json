@@ -4,7 +4,11 @@
             "name": "Win32",
             "configurationProvider": "ms-vscode.cmake-tools",
             "intelliSenseMode": "windows-msvc-x64",
-            "compileCommands": "${workspaceFolder}/out/build/Windows-Default/compile_commands.json"
+            "compileCommands": "${workspaceFolder}/out/build/Windows-Default/compile_commands.json",
+            "compilerArgs": [
+                "/ifcSearchDir",
+                "${workspaceFolder}/out/build/Windows-Default/src/CMakeFiles/stdmodules.dir"
+            ]
         }
     ],
     "version": 4
