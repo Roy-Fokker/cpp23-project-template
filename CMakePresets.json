@@ -8,14 +8,10 @@
 	"configurePresets": [
 		{
 			"name": "base",
-			"description": "Configure with vcpkg toolchain and set some basic directories",
+			"description": "Set some basic directories",
 			"hidden": true,
-			"binaryDir": "${sourceDir}/out/build/${presetName}",
-			"installDir": "${sourceDir}/out/install/${presetName}",
-			"toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-			"environment": {
-				"VCPKG_FEATURE_FLAGS": "manifests,versions,binarycaching,registries"
-			},
+			"binaryDir": "${sourceDir}/builds/${presetName}",
+			"installDir": "${sourceDir}/install/${presetName}",
 			"cacheVariables": {
 				"CMAKE_EXPORT_COMPILE_COMMANDS": true,
 				"CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin",
@@ -23,10 +19,17 @@
 			}
 		},
 		{
+			"name": "vcpkg",
+			"description": "Configure VCPkg toolchain",
+			"toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+			"environment": {
+				"VCPKG_FEATURE_FLAGS": "manifests,versions,binarycaching,registries"
+			}
+		},
+		{
 			"name": "ninja",
 			"displayName": "Ninja build",
 			"description": "Generate Ninja project files for current configuration",
-			"inherits": "base",
 			"hidden": true,
 			"generator": "Ninja"
 		},
@@ -34,7 +37,6 @@
 			"name": "ninja-multi-config",
 			"displayName": "Ninja Build Multi-Config",
 			"description": "Generate Ninja project files for all configurations",
-			"inherits": "base",
 			"hidden": true,
 			"generator": "Ninja Multi-Config"
 		},
@@ -51,7 +53,6 @@
 				"strategy": "external"
 			},
 			"cacheVariables": {
-				"MSVC_TOOLS_VERSION": "14.39.33519",
 				"CMAKE_CXX_COMPILER": "cl.exe",
 				"CMAKE_CXX_FLAGS": "/utf-8 /EHsc /W4 /permissive- /Zc:__cplusplus /Zc:preprocessor /Zc:throwingNew /Zc:inline /Zc:externConstexpr /Zc:templateScope /Zc:checkGwOdr /Zc:enumTypes"
 			}
@@ -60,6 +61,8 @@
 			"name": "Windows-Default",
 			"displayName": "Windows x64 Build",
 			"inherits": [
+				"base",
+				"vcpkg",
 				"ninja",
 				"msvc-x64"
 			],
