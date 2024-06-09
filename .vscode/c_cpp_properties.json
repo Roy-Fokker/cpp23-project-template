@@ -1,14 +1,12 @@
 {
     "configurations": [
         {
-            "name": "Win32",
+            "name": "msvc config",
             "configurationProvider": "ms-vscode.cmake-tools",
+            "cStandard": "c23",
+            "cppStandard": "c++23",
             "intelliSenseMode": "windows-msvc-x64",
-            "compileCommands": "${workspaceFolder}/out/build/Windows-Default/compile_commands.json",
-            "compilerArgs": [
-                "/ifcSearchDir",
-                "${workspaceFolder}/out/build/Windows-Default/src/CMakeFiles/stdmodules.dir"
-            ]
+            "compileCommands": "${workspaceFolder}/builds/Windows-Default/compile_commands.json"
         }
     ],
     "version": 4
