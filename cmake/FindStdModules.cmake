@@ -1,5 +1,5 @@
-# cmake version needs to be above 3.28 for module support
-cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
+# cmake version needs to be above 3.29 for module support
+cmake_minimum_required(VERSION 3.29 FATAL_ERROR)
 
 # must have C++ Standard version 23 or better
 if (CMAKE_CXX_STANDARD LESS 23)
@@ -8,85 +8,66 @@ endif()
 
 # must ensure extensions are off
 if ((NOT CMAKE_CXX_STANDARD_REQUIRED) OR (CMAKE_CXX_EXTENSIONS))
-	message(FATAL_ERROR "Standards conformance is required.")
+	message(FATAL_ERROR "Standards conformance is required. No C++ compiler extensions.")
 endif()
 
-# figure out path to STD Module path for current compiler
-if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-	# using visual studio C++ compiler
-	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS "19.36")
-		message(FATAL_ERROR "MSVC version greater than 19.36 is required.")
+# which compiler is being used?
+# if MSVC v19.38+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" 
+	AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "19.38")
+	# copy the module .ixx file from MSVC's folder
+	# if the environment variable is defined. Done if cmake is run from MSVS Developer Console.
+	if (DEFINED ENV{VCToolsInstallDir})  
+		string(REPLACE "\\" "/" STD_MODULES_DIR "$ENV{VCToolsInstallDir}")
+		set(STD_MODULES_DIR "${STD_MODULES_DIR}modules")
+	else()
+		# use a hacky method to get MSVC install directory from compiler path
+		string(REGEX REPLACE "\/bin\/Host(x|X)(64|86)\/x(64|86)\/cl\.exe" "" STD_MODULES_DIR "${CMAKE_CXX_COMPILER}")
+		set(STD_MODULES_DIR "${STD_MODULES_DIR}/modules")
 	endif()
 
-	if (NOT ("$ENV{VCToolsInstallDir}" STREQUAL ""))
-		# get MSVC install path
-		set(VC_INSTALL_DIR $ENV{VCToolsInstallDir})
-		string(REPLACE "\\" "/" VC_INSTALL_DIR "${VC_INSTALL_DIR}")
-		
-	else ()
-		# get MSVC install path
-		set(VC_INSTALL_DIR $ENV{VCInstallDir}Tools/MSVC/${MSVC_TOOLS_VERSION})
-		string(REPLACE "\\" "/" VC_INSTALL_DIR "${VC_INSTALL_DIR}")
-	endif()
+	# get the files for std module using Fetch Content
+	include(FetchContent)
+	FetchContent_Declare(
+		std23modules
+		URL "file://${STD_MODULES_DIR}"
+		DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+		SYSTEM
+	)
+	FetchContent_MakeAvailable(std23modules)
 
-	# Std module file path for this compiler
-	set(STD_MODULE_PATH "${VC_INSTALL_DIR}/modules")
-	set(STD_MODULE_FILE_EXT "ixx") # MSVC STL uses .ixx extensions for modules
-
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")  # using LLVM Clang C++ compiler
-	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS "17.0.0")
-		message(FATAL_ERROR "Clang++ version greater than 17.0.0 is required.")
-	endif()
-
-	message(FATAL_ERROR "Clang++ usage not implemented.")
-
-	# Std module file path for this compiler
-	set(STD_MODULE_PATH "")
-	set(STD_MODULE_FILE_EXT "cppm") # clang uses .cppm extensions for modules
-
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")  # using GNU Compiler Collection C++ compiler
-	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS "14.0.0")
-		message(FATAL_ERROR "GCC version greater than 14.0.0 is required.")
-	endif()
-
-	message(FATAL_ERROR "GCC usage not implemented.")
-
-	# Std module file path for this compiler
-	set(STD_MODULE_PATH "")
-	set(STD_MODULE_FILE_EXT "cppm") # GNU GCC uses .cppm extensions for modules
+	set(std23modules_SOURCES 
+		${std23modules_SOURCE_DIR}/std.ixx 
+		${std23modules_SOURCE_DIR}/std.compat.ixx
+	)
+else()
+	message(FATAL_ERROR "C++23 Standard library module is not supported with current compiler.")
 endif()
 
-include(FetchContent)
-# copy files from compiler's directory to our project directory
-FetchContent_Declare(
-	stdmodules
-	URL "file://${STD_MODULE_PATH}"
-	DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-	FIND_PACKAGE_ARGS NAMES stdmodules # tell cmake to make it available via find_package
-	SYSTEM
-)
-FetchContent_MakeAvailable(stdmodules)
+# set library name variable
+set(PRJ_LIB_NAME "stdmodules")
 
-# create stdmodules library for consumption 
-add_library(stdmodules STATIC)
-target_sources(stdmodules
+# create library
+add_library(${PRJ_LIB_NAME} STATIC)
+
+# add std module source files to our std modules library
+target_sources(${PRJ_LIB_NAME}
 	PUBLIC 
-	FILE_SET std_modules TYPE CXX_MODULES
-	BASE_DIRS ${stdmodules_SOURCE_DIR}
-	FILES
-		${stdmodules_SOURCE_DIR}/std.${STD_MODULE_FILE_EXT}
-		${stdmodules_SOURCE_DIR}/std.compat.${STD_MODULE_FILE_EXT}
+		FILE_SET std_modules TYPE CXX_MODULES
+		BASE_DIRS ${std23modules_SOURCE_DIR}
+		FILES
+			${std23modules_SOURCES}
 )
 
 # Copy ifc files for IntelliSense
 install(
-	DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/stdmodules.dir/
+	DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/${PRJ_LIB_NAME}.dir/
 	DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/ifc
 	FILES_MATCHING PATTERN "*.ifc"
 )
 
-# message("\n"
-# 	"The package stdmodules provides CMake targets: \n\n"
-# 	"	find_package(stdmodules)\n"
-# 	"	target_link_libraries(main PRIVATE stdmodules)\n"
-# )
+message("\n"
+	"The package ${PRJ_LIB_NAME} provides CMake targets: \n"
+ 	"\tfind_package(${PRJ_LIB_NAME})\n"
+ 	"\ttarget_link_libraries(main PRIVATE ${PRJ_LIB_NAME})\n"
+)
