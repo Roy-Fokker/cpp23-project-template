@@ -1,6 +1,12 @@
 # find vcpkg installed library
 find_package(fmt CONFIG REQUIRED)
 
+# CMake find std modules
+find_package(stdmodules REQUIRED)
+
+# Alternative method to consume C++ Standard library modules
+# include(${PROJECT_SOURCE_DIR}/cmake/std23modules.cmake)
+
 # name of this application/library
 set(PRJ_APP_NAME "cpp23-application")
 
@@ -33,5 +39,5 @@ target_sources(${PRJ_APP_NAME}
 # libraries used by this application
 target_link_libraries(${PRJ_APP_NAME}
 	PRIVATE
-		fmt::fmt
+		stdmodules
 )
