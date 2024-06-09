@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.29.0 FATAL_ERROR)
 
 # set library name variable
-set(PRJ_LIB_NAME "std23modules")
+set(PRJ_LIB_NAME "stdmodules")
 
 # if the compiler being used is MSVC
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "19.36")
