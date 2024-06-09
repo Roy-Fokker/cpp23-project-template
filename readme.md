@@ -5,10 +5,12 @@
 - ninja for build engine
 - cmake with cmakepresets for build generator
 - C++ modules enabled
+- Uses C++ Standard Library modules
+  - MSVC
 
 ## to be figured out
-- enabling standard module 
 - linux configuration
+- Non MSVC compilers
 
 ## Example project
 - uses fmt from vcpkg
