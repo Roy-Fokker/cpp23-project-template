@@ -43,4 +43,5 @@ target_sources(${PRJ_APP_NAME}
 target_link_libraries(${PRJ_APP_NAME}
 	PRIVATE
 		stdmodules
+		fmt::fmt
 )
