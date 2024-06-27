@@ -2,7 +2,7 @@
 	"version": 7,
 	"cmakeMinimumRequired": {
 		"major": 3,
-		"minor": 28,
+		"minor": 29,
 		"patch": 0
 	},
 	"configurePresets": [
@@ -20,6 +20,7 @@
 		},
 		{
 			"name": "vcpkg",
+			"hidden": true,
 			"description": "Configure VCPkg toolchain",
 			"toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
 			"environment": {
