@@ -7,6 +7,11 @@ find_package(stdmodules REQUIRED)
 # Alternative method to consume C++ Standard library modules
 # include(${PROJECT_SOURCE_DIR}/cmake/std23modules.cmake)
 
+# get platform specific configs
+if(MSVC)
+	include(${PROJECT_SOURCE_DIR}/cmake/Win32Presets.cmake)
+endif()
+
 # name of this application/library
 set(PRJ_APP_NAME "cpp23-application")
 
@@ -20,9 +25,7 @@ target_compile_features(${PRJ_APP_NAME} PRIVATE cxx_std_23)
 target_compile_definitions(${PRJ_APP_NAME}
 	PRIVATE 
 		UNICODE _UNICODE            # Tell compiler we are using UNICODE
-		_CRT_SECURE_NO_WARNINGS     # Don't want MSVC's CRT warnings
-		NOMINMAX                    # Don't want Window.h to define min and max macros
-		WIN32_LEAN_AND_MEAN         # Windows.h should only include the basics
+		${platform_definitions}     # Get platform specific definitions
 )
 
 # source files for this application
