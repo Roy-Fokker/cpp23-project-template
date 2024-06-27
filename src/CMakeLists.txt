@@ -5,7 +5,7 @@ find_package(fmt CONFIG REQUIRED)
 find_package(stdmodules REQUIRED)
 
 # Alternative method to consume C++ Standard library modules
-# include(${PROJECT_SOURCE_DIR}/cmake/std23modules.cmake)
+# include(${PROJECT_SOURCE_DIR}/cmake/FindStdModules.cmake)
 
 # get platform specific configs
 if(MSVC)
