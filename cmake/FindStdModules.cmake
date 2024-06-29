@@ -47,27 +47,30 @@ endif()
 # set library name variable
 set(PRJ_LIB_NAME "stdmodules")
 
-# create library
-add_library(${PRJ_LIB_NAME} STATIC)
+# check against duplicate include
+if (NOT TARGET ${PRJ_LIB_NAME})
+	# create library
+	add_library(${PRJ_LIB_NAME} STATIC)
 
-# add std module source files to our std modules library
-target_sources(${PRJ_LIB_NAME}
-	PUBLIC 
-		FILE_SET std_modules TYPE CXX_MODULES
-		BASE_DIRS ${std23modules_SOURCE_DIR}
-		FILES
-			${std23modules_SOURCES}
-)
+	# add std module source files to our std modules library
+	target_sources(${PRJ_LIB_NAME}
+		PUBLIC 
+			FILE_SET std_modules TYPE CXX_MODULES
+			BASE_DIRS ${std23modules_SOURCE_DIR}
+			FILES
+				${std23modules_SOURCES}
+	)
 
-# Copy ifc files for IntelliSense
-install(
-	DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/${PRJ_LIB_NAME}.dir/
-	DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/ifc
-	FILES_MATCHING PATTERN "*.ifc"
-)
+	# Copy ifc files for IntelliSense
+	install(
+		DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/${PRJ_LIB_NAME}.dir/
+		DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/ifc
+		FILES_MATCHING PATTERN "*.ifc"
+	)
 
-message("\n"
-	"The package ${PRJ_LIB_NAME} provides CMake targets: \n"
- 	"\tfind_package(${PRJ_LIB_NAME})\n"
- 	"\ttarget_link_libraries(main PRIVATE ${PRJ_LIB_NAME})\n"
-)
+	message("\n"
+		"The package ${PRJ_LIB_NAME} provides CMake targets: \n"
+		"\tfind_package(${PRJ_LIB_NAME})\n"
+		"\ttarget_link_libraries(main PRIVATE ${PRJ_LIB_NAME})\n"
+	)
+endif()
