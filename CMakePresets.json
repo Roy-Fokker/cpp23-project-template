@@ -72,6 +72,30 @@
 				"lhs": "${hostSystemName}",
 				"rhs": "Windows"
 			}
+		},
+		{
+			"name": "clang-x64",
+			"displayName": "LLVM Clang++ configuration",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "clang++",
+				"CMAKE_CXX_FLAGS": "-stdlib=libc++ -Wall -Wextra"
+			}
+		},
+		{
+			"name": "Linux-Default",
+			"displayName": "Linux x64 Build",
+			"inherits": [
+				"base",
+				"vcpkg",
+				"ninja",
+				"clang-x64"
+			],
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Linux"
+			}
 		}
 	],
 	"buildPresets": [
@@ -96,6 +120,13 @@
 			"displayName": "Windows RelWithDebInfo",
 			"description": "Build using ninja multi vcpkg relwithdebinfo configuration for windows",
 			"configuration": "RelWithDebInfo"
+		},
+		{
+			"name": "linux-debug",
+			"configurePreset": "Linux-Default",
+			"displayName": "Linux Debug",
+			"description": "Build using ninja, debug configuration for Linux",
+			"configuration": "Debug"
 		}
 	]
 }
