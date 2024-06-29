@@ -45,7 +45,7 @@ else()
 endif()
 
 # set library name variable
-set(PRJ_LIB_NAME "stdmodules")
+set(PRJ_LIB_NAME "StdModules")
 
 # check against duplicate include
 if (NOT TARGET ${PRJ_LIB_NAME})

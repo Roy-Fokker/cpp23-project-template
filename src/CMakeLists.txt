@@ -2,7 +2,7 @@
 find_package(fmt CONFIG REQUIRED)
 
 # CMake find std modules
-find_package(stdmodules REQUIRED)
+find_package(StdModules REQUIRED)
 
 # Alternative method to consume C++ Standard library modules
 # include(${PROJECT_SOURCE_DIR}/cmake/FindStdModules.cmake)
@@ -42,6 +42,6 @@ target_sources(${PRJ_APP_NAME}
 # libraries used by this application
 target_link_libraries(${PRJ_APP_NAME}
 	PRIVATE
-		stdmodules
+		StdModules
 		fmt::fmt
 )
