@@ -44,16 +44,19 @@ else()
 	message(FATAL_ERROR "C++23 Standard library module is not supported with current compiler.")
 endif()
 
-# set library name variable
-set(PRJ_LIB_NAME "StdModules")
+# set library name variables
+set(STD_LIB_NS "Std") # Namespace we want
+set(STD_LIB_MODULE "Modules") # Library name
+set(PRJ_LIB_NAME ${STD_LIB_NS}${STD_LIB_MODULE}) 
 
 # check against duplicate include
-if (NOT TARGET ${PRJ_LIB_NAME})
+if (NOT TARGET ${STD_LIB_NS}::${STD_LIB_MODULE})
 	# create library
 	add_library(${PRJ_LIB_NAME} STATIC)
+	add_library(${STD_LIB_NS}::${STD_LIB_MODULE} ALIAS ${PRJ_LIB_NAME})
 
 	# add std module source files to our std modules library
-	target_sources(${PRJ_LIB_NAME}
+	target_sources(${STD_LIB_NS}${STD_LIB_MODULE}
 		PUBLIC 
 			FILE_SET std_modules TYPE CXX_MODULES
 			BASE_DIRS ${std23modules_SOURCE_DIR}
@@ -69,8 +72,7 @@ if (NOT TARGET ${PRJ_LIB_NAME})
 	)
 
 	message("\n"
-		"The package ${PRJ_LIB_NAME} provides CMake targets: \n"
-		"\tfind_package(${PRJ_LIB_NAME})\n"
-		"\ttarget_link_libraries(main PRIVATE ${PRJ_LIB_NAME})\n"
+		"The StdModules.cmake usage: \n"
+		"\ttarget_link_libraries(main PRIVATE ${STD_LIB_NS}::${STD_LIB_MODULE})\n"
 	)
 endif()

@@ -15,5 +15,8 @@ set(CMAKE_CXX_STANDARD 23)
 # standard is required
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Include Std Modules cmake
+include(${CMAKE_MODULE_PATH}/StdModules.cmake)
+
 # executable source folder
 add_subdirectory(src)
