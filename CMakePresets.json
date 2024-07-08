@@ -1,5 +1,6 @@
 {
-	"version": 7,
+	"version": 8,
+	"$schema": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json",
 	"cmakeMinimumRequired": {
 		"major": 3,
 		"minor": 29,
@@ -59,7 +60,7 @@
 			}
 		},
 		{
-			"name": "Windows-Default",
+			"name": "windows-default",
 			"displayName": "Windows x64 Build",
 			"inherits": [
 				"base",
@@ -77,14 +78,14 @@
 	"buildPresets": [
 		{
 			"name": "windows-debug",
-			"configurePreset": "Windows-Default",
+			"configurePreset": "windows-default",
 			"displayName": "Windows Debug",
 			"description": "Build using ninja multi vcpkg debug configuration for windows",
 			"configuration": "Debug"
 		},
 		{
 			"name": "windows-release",
-			"configurePreset": "Windows-Default",
+			"configurePreset": "windows-default",
 			"displayName": "Windows Release",
 			"description": "Build using ninja multi vcpkg release configuration for windows",
 			"configuration": "Release",
@@ -92,7 +93,7 @@
 		},
 		{
 			"name": "windows-relwithdebinfo",
-			"configurePreset": "Windows-Default",
+			"configurePreset": "windows-default",
 			"displayName": "Windows RelWithDebInfo",
 			"description": "Build using ninja multi vcpkg relwithdebinfo configuration for windows",
 			"configuration": "RelWithDebInfo"
