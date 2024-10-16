@@ -4,7 +4,7 @@
 - vcpkg for package management
 - ninja for build engine
 - cmake with cmakepresets for configuration and build
-- cmake min_ver 3.29
+- cmake min_ver 3.30
 - C++ modules enabled
 - Uses C++ Standard Library modules
   - MSVC
