@@ -36,6 +36,6 @@ target_sources(${PRJ_APP_NAME}
 # libraries used by this application
 target_link_libraries(${PRJ_APP_NAME}
 	PRIVATE
-		Std::Modules
+#		Std::Modules
 		fmt::fmt
 )

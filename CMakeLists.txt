@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.28)
 
+# Include Std Modules cmake 
+# must be included BEFORE project() call
+include(${CMAKE_MODULE_PATH}/cmake-3.30-stdmods.cmake)
+
 # project and language to be used
 project(cpp23-project-template
 	LANGUAGES CXX
@@ -14,9 +18,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 23)
 # standard is required
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# Include Std Modules cmake
-include(${CMAKE_MODULE_PATH}/StdModules.cmake)
 
 # executable source folder
 add_subdirectory(src)
