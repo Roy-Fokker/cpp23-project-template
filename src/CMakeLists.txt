@@ -3,7 +3,7 @@ find_package(fmt CONFIG REQUIRED)
 
 # get platform specific configs
 if(MSVC)
-	include(${PROJECT_SOURCE_DIR}/cmake/Win32Presets.cmake)
+	include(${CMAKE_MODULE_PATH}/Win32Presets.cmake)
 endif()
 
 # name of this application/library
@@ -20,6 +20,12 @@ target_compile_definitions(${PRJ_APP_NAME}
 	PRIVATE 
 		UNICODE _UNICODE            # Tell compiler we are using UNICODE
 		${platform_definitions}     # Get platform specific definitions
+)
+
+# set compiler options
+target_link_options(${PRJ_APP_NAME}
+	PRIVATE
+		${executable_link_options}
 )
 
 # source files for this application
