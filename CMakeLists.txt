@@ -1,4 +1,8 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.30)
+
+# Include Std Modules cmake 
+# must be included BEFORE project() call
+include(${CMAKE_MODULE_PATH}/cmake-3.30-stdmods.cmake)
 
 # project and language to be used
 project(cpp23-project-template
