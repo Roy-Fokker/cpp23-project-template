@@ -3,7 +3,9 @@ find_package(fmt CONFIG REQUIRED)
 
 # get platform specific configs
 if(MSVC)
-	include(${PROJECT_SOURCE_DIR}/cmake/Win32Presets.cmake)
+	include(${CMAKE_MODULE_PATH}/Win32Presets.cmake)
+elseif(LINUX)
+	include(${CMAKE_MODULE_PATH}/LinuxPresets.cmake)
 endif()
 
 # name of this application/library
@@ -36,6 +38,5 @@ target_sources(${PRJ_APP_NAME}
 # libraries used by this application
 target_link_libraries(${PRJ_APP_NAME}
 	PRIVATE
-#		Std::Modules
 		fmt::fmt
 )
