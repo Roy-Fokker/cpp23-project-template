@@ -19,7 +19,5 @@ project(cpp23-project-template
 	HOMEPAGE_URL "https://roy-fokker.github.io/cpp23-project-template/"
 	DESCRIPTION "C++23 based Project Template.")
 
-
-
 # executable source folder
 add_subdirectory(src)

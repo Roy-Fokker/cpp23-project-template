@@ -24,6 +24,12 @@ target_compile_definitions(${PRJ_APP_NAME}
 		${platform_definitions}     # Get platform specific definitions
 )
 
+# precompiled headers
+target_precompile_headers(${PRJ_APP_NAME}
+	PRIVATE
+		pch.hpp
+)
+
 # source files for this application
 target_sources(${PRJ_APP_NAME}
 	# Non C++ module source files
