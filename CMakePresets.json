@@ -100,6 +100,9 @@
 				"ninja",
 				"clang-x64"
 			],
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug"
+			},
 			"condition": {
 				"type": "equals",
 				"lhs": "${hostSystemName}",
