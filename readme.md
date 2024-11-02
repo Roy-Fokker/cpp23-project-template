@@ -16,3 +16,8 @@
 
 ## Example project
 - uses fmt from vcpkg
+
+## references
+- Building on linux with Clang and libc++ for module support, https://mattbolitho.github.io/posts/vcpkg-with-libcxx/
+- CMake 3.30 magic encantations, https://www.kitware.com/import-std-in-cmake-3-30/
+- CMake module compilations, https://www.kitware.com/import-cmake-the-experiment-is-over/
