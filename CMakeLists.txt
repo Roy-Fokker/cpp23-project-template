@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Include Std Modules cmake 
 # must be included BEFORE project() call
-include(${CMAKE_MODULE_PATH}/cmake-3.30-stdmods.cmake)
+include(${CMAKE_MODULE_PATH}/import-std.cmake)
 
 # project and language to be used
 project(cpp23-project-template
