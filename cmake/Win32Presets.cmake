@@ -24,3 +24,8 @@ LIST(APPEND compiler_options
 	/Zc:enumTypes          # Enable Standard C++ rules for enum type deduction
 )
 
+# Set Executable Compiler Options
+LIST(APPEND executable_link_options
+	/SUBSYSTEM:WINDOWS     # Windows UI application, not console
+	/ENTRY:mainCRTStartup  # Use main as program entry point
+)
