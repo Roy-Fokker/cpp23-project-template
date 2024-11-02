@@ -24,10 +24,6 @@
 			"hidden": true,
 			"description": "Configure VCPkg toolchain",
 			"toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-			"cacheVariables": {
-				"VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake",
-				"VCPKG_TARGET_TRIPLET": "x64-linux-libcxx"
-			},
 			"environment": {
 				"VCPKG_FEATURE_FLAGS": "manifests,versions,binarycaching,registries"
 			}
@@ -84,7 +80,9 @@
 			"hidden": true,
 			"cacheVariables": {
 				"CMAKE_CXX_COMPILER": "clang++",
-				"CMAKE_CXX_FLAGS": "-stdlib=libc++ -std=c++23 -Wall -Wextra"
+				"CMAKE_CXX_FLAGS": "-stdlib=libc++ -std=c++23 -Wall -Wextra",
+				"VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake",
+				"VCPKG_TARGET_TRIPLET": "x64-linux-libcxx"
 			},
 			"environment": {
 				"CC": "clang",
