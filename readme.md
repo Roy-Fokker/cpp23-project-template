@@ -7,12 +7,14 @@
 - cmake min_ver 3.30
 - C++ modules enabled
 - Uses C++ Standard Library modules
-  - MSVC
+  - MSVC (Windows only)
+  - Clang (Linux with libc++ only)
 
 ## to be figured out
-- linux configuration
-- Non MSVC compilers
 - Intellisense and clangd both cannot handle modules so don't work correctly
 
 ## Example project
 - uses fmt from vcpkg
+
+## references
+- Building on linux with Clang and libc++ for module support, https://mattbolitho.github.io/posts/vcpkg-with-libcxx/
