@@ -1,4 +1,4 @@
-#include <fmt/core.h> // Must be included before import std;
+#include <fmt/core.h>
 
 import std;
 import example;
