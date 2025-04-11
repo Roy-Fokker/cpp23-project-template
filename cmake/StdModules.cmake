@@ -1,5 +1,5 @@
 # cmake version needs to be above 3.29 for module support
-cmake_minimum_required(VERSION 3.29 FATAL_ERROR)
+cmake_minimum_required(VERSION 4.0 FATAL_ERROR)
 
 # must have C++ Standard version 23 or better
 if (CMAKE_CXX_STANDARD LESS 23)
