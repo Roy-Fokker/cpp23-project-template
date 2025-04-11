@@ -29,6 +29,15 @@
 			}
 		},
 		{
+			"name": "cpm",
+			"hidden": true,
+			"description": "CPM.Cmake Configuration",
+			"cacheVariables": {
+				"CPM_SOURCE_CACHE": "${sourceDir}/.cache/CPM",
+				"CPM_USE_NAMED_CACHE_DIRECTORIES": "ON"
+			}
+		},
+		{
 			"name": "ninja",
 			"displayName": "Ninja build",
 			"description": "Generate Ninja project files for current configuration",
@@ -64,7 +73,7 @@
 			"displayName": "Windows x64 Build",
 			"inherits": [
 				"base",
-				"vcpkg",
+				"cpm",
 				"ninja",
 				"msvc-x64"
 			],
@@ -94,7 +103,7 @@
 			"displayName": "Linux x64 Build",
 			"inherits": [
 				"base",
-				"vcpkg",
+				"cpm",
 				"ninja",
 				"clang-x64"
 			],

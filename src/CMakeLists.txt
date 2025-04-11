@@ -1,5 +1,5 @@
 # find vcpkg installed library
-find_package(fmt CONFIG REQUIRED)
+# find_package(fmt CONFIG REQUIRED) # Not needed when using CPM.cmake
 
 # get platform specific configs
 if(MSVC)

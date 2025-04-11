@@ -7,6 +7,9 @@
 # ignore vcpkg folder
 /vcpkg
 
+# Ignore cpm.cmake cached files
+/.cache/CPM/*
+
 # ignore vscode specific directory
 .vscode/*
 !.vscode/tasks.json

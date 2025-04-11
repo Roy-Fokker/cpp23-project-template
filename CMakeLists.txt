@@ -13,6 +13,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # must be included BEFORE project() call
 include(${CMAKE_MODULE_PATH}/import-std.cmake)
 
+# Dependencies
+include(${CMAKE_MODULE_PATH}/CPM.cmake)
+CPMAddPackage("gh:fmtlib/fmt#11.1.4")
+
 # project and language to be used
 project(cpp23-project-template
 	LANGUAGES CXX
