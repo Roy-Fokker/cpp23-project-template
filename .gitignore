@@ -1,4 +1,4 @@
-# ignore CMake Build directory
+﻿# ignore CMake Build directory
 /builds
 /install
 /out
@@ -57,6 +57,9 @@
 # Visual Studio folders
 .vs/*
 !.vs/launch.vs.json
+
+# Intellisense Program database
+*.pdb
 
 # other files/folders
 .DS_Store
